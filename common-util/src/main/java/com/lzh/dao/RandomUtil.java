@@ -3,7 +3,6 @@ package com.lzh.dao;
 import java.util.Random;
 
 
-
 /**
 
  * @ClassName:  RandomUtil   
