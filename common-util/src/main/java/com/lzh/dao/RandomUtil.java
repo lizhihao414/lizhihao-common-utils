@@ -55,7 +55,7 @@ public class RandomUtil {
 
 		for(int i=0;i<100;i++) {
 
-			System.out.println(random(1,2));
+			System.out.println(random(1,5));
 
 		}
 

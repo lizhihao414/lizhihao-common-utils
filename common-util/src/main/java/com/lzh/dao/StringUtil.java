@@ -1,474 +1,280 @@
 package com.lzh.dao;
 
-
 import java.io.UnsupportedEncodingException;
-
 import java.util.Random;
 
-
-
-/**  
-
- * @ClassName:  StringUtil   
-
- * @Description:×Ö·û´®¹¤¾ßÀà    
-
- * @date:   2020Äê1ÔÂ3ÈÕ ÉÏÎç9:08:16
-
- */
-
 public class StringUtil {
-
 	/**
-
-	 * @Title: isNull   
-
-	 * @Description: ÅĞ¶Ï×Ö·û´®ÊÇ·ñÎª¿Õ   
-
+	 * @Title: isBlank   
+	 * @Description: åˆ¤æ–­å­—ç¬¦ä¸²æ˜¯å¦ä¸ºç©º  
 	 * @param: @param str
-
 	 * @param: @return      
-
 	 * @return: boolean      
-
 	 * @throws
-
 	 */
-
-	public static boolean isNull(String str) {
-
+	public static boolean isBlank(String str) {
 		if(str==null) {
-
 			return true;
-
 		}
-
-		/** È¥¿Õ¸ñºó£¬Èç¹ûÎª"",·µ»Øtrue **/
-
+		//å»ç©ºæ ¼
 		str = str.trim();
-
-		if("".equals(str)) {
-
+		//
+		if(str.length()==0) {
 			return true;
-
 		}
-
 		return false;
-
 	}
-
 	/**
-
-	 * @Title: isNotNull   
-
-	 * @Description: ÅĞ¶Ï×Ö·û´®²»Îª¿Õ   
-
+	 * @Title: isNotBlank   
+	 * @Description: å­—ç¬¦ä¸²å†…å®¹ä¸ä¸ºç©ºï¼Œè¿”å›true   
 	 * @param: @param str
-
 	 * @param: @return      
-
 	 * @return: boolean      
-
 	 * @throws
-
 	 */
-
-	public static boolean isNotNull(String str) {
-
-		return !isNull(str);
-
+	public static boolean isNotBlank(String str) {
+		return !isBlank(str);
 	}
-
+	
 	/**
-
 	 * @Title: isPhoneNum   
-
-	 * @Description: ÊÇ·ñÎªÊÖ»úºÅ   18618109887
-
+	 * @Description: åˆ¤æ–­å­—ç¬¦ä¸²æ˜¯å¦ä¸ºæ‰‹æœºå·   
 	 * @param: @param str
-
 	 * @param: @return      
-
 	 * @return: boolean      
-
 	 * @throws
-
 	 */
-
 	public static boolean isPhoneNum(String str) {
-
 		String regex = "1[3578]\\d{9}";
-
 		return str.matches(regex);
-
 	}
-
 	/**
-
 	 * @Title: isEmail   
-
-	 * @Description: ÅĞ¶ÏÊÇ·ñÎªÓÊÏä zhanggm1002@qq.com   
-
-	 * @param: @param str
-
+	 * @Description: éªŒè¯æ˜¯å¦ä¸ºé‚®ç®±   
+	 * @param: @param str zhanggm1002@qq.com
 	 * @param: @return      
-
 	 * @return: boolean      
-
 	 * @throws
-
 	 */
-
 	public static boolean isEmail(String str) {
-
-		String regex = "\\w+@\\w+.(com|cn|com.cn|net)";
-
+		String regex = "[A-Za-z0-9]+@[A-Za-z0-9]+.(com|cn|com.cn|net)";
 		return str.matches(regex);
-
 	}
-
 	/**
-
 	 * @Title: isLetter   
-
-	 * @Description: ÅĞ¶ÏÊÇ·ñÈ«Îª×ÖÄ¸   
-
-	 * @param: @param str
-
+	 * @Description: TODO(æè¿°è¿™ä¸ªæ–¹æ³•çš„ä½œç”¨)   
 	 * @param: @return      
-
 	 * @return: boolean      
-
 	 * @throws
-
 	 */
-
 	public static boolean isLetter(String str) {
-
-		if(isNull(str)) {
-
-			return false;
-
+		if(isNotBlank(str)) {
+			str = str.toLowerCase();
+			String regex = "[a-z]+";
+			return str.matches(regex);
 		}
-
-		str = str.toLowerCase();
-
-		String regex = "[a-z]+";
-
-		return str.matches(regex);
-
+		return false;
 	}
-
 	/**
-
-	 * @Title: getRandomChar   
-
-	 * @Description: »ñµÃËæ»úÒ»¸ö×Ö·û   
-
+	 * @Title: getRandomAzChar   
+	 * @Description: è·å–éšæœºå­—ç¬¦ï¼ˆa-zï¼‰   
 	 * @param: @return      
-
 	 * @return: char      
-
 	 * @throws
-
 	 */
-
-	public static char getRandomChar() {
-
+	public static char getRandomAzChar() {
+		//éšæœºç±»
 		Random random = new Random();
-
-		char c = (char)('a'+random.nextInt(26));
-
-		return c;
-
+		//å¼€å§‹å­—ç¬¦åœ¨acsiiç 
+		int startChar = 'a'+0;
+		//ç”Ÿæˆéšæœºå­—ç¬¦
+		char newChar = (char)(startChar+random.nextInt(26));
+		return newChar;
 	}
-
 	/**
-
-	 * @Title: getRandomChar   
-
-	 * @Description: »ñµÃÖ¸¶¨Î»ÊıµÄËæ»ú×Ö·û   
-
+	 * @Title: getRandomLetter   
+	 * @Description: è·å–éšæœºå­—ç¬¦ä¸² 
 	 * @param: @param num
-
 	 * @param: @return      
-
 	 * @return: String      
-
 	 * @throws
-
 	 */
-
-	public static String getRandomChar(int num) {
-
+	public static String getRandomLetter(int num) {
+		//ä¿å­˜ç”Ÿæˆèƒ¡å­—ç¬¦
 		StringBuffer sb = new StringBuffer();
-
+		//ç”Ÿæˆéšæœºå­—ç¬¦
 		for(int i=0;i<num;i++) {
-
-			char c = getRandomChar();
-
-			sb.append(c);
-
+			char newChar = getRandomAzChar();
+			sb.append(newChar);
 		}
-
 		return sb.toString();
-
 	}
-
 	
-
 	/**
-
-	 * @Title: getRandomNumber   
-
-	 * @Description: »ñµÃËæ»úÊı×Ö   
-
+	 * @Title: getRandomNumberChar   
+	 * @Description: è·å–éšæœºæ•°å­—å­—ç¬¦ 
 	 * @param: @return      
-
 	 * @return: char      
-
 	 * @throws
-
 	 */
-
-	public static char getRandomNumber() {
-
+	public static char getRandomNumberChar() {
+		//éšæœºç±»
 		Random random = new Random();
-
-		char c = (char)('0'+random.nextInt(10));
-
-		return c;
-
+		//å¼€å§‹å­—ç¬¦åœ¨acsiiç 
+		int startChar = '0'+0;
+		//ç”Ÿæˆéšæœºå­—ç¬¦
+		char newChar = (char)(startChar+random.nextInt(10));
+		return newChar;
 	}
-
-	
-
 	/**
-
-	 * @Title: getRandomCharAndNumber   
-
-	 * @Description: »ñµÃËæ»ú×Ö·û´®£¨Êı×Ö+×Ö·û£©   
-
+	 * @Title: getRandomLetterAndNumberStr   
+	 * @Description: è·å¾—éšæœºå­—ç¬¦ä¸²ï¼ˆa-z0-9ï¼‰   
 	 * @param: @param num
-
 	 * @param: @return      
-
-	 * @return: char      
-
+	 * @return: String      
 	 * @throws
-
 	 */
-
-	public static String getRandomCharAndNumber(int num) {
-
+	public static String getRandomLetterAndNumberStr(int num) {
 		StringBuffer sb = new StringBuffer();
-
 		Random random = new Random();
-
-		for(int i=0;i<num;i++) {
-
-			int randomNum = random.nextInt(36);
-
-			if(randomNum>10) {
-
-				char c = getRandomChar();
-
-				sb.append(c);
-
+		for (int i = 0; i < num; i++) {
+			if(random.nextInt(36)>10) {
+				sb.append(getRandomAzChar());
 			}else {
-
-				char c = getRandomNumber();
-
-				sb.append(c);
-
+				sb.append(getRandomNumberChar());
 			}
-
 		}
-
 		return sb.toString();
-
 	}
-
+	
 	/**
-
 	 * @Title: randomChineseString   
-
-	 * @Description: Ëæ»úÖĞÎÄ   
-
+	 * @Description: è¿”å›ä¸€ä¸ªä¸­æ–‡æ–‡å­—//GB2312ä¸­æ–‡ç®€ä½“  
 	 * @param: @return      
-
 	 * @return: String      
-
 	 * @throws
-
 	 */
-
 	public static String randomChineseString() {
-
 		String str = null;
-
 		int highPos, lowPos;
-
 		Random random = new Random();
-
-		highPos = (176 + Math.abs(random.nextInt(39)));// ÇøÂë£¬0xA0´òÍ·£¬´ÓµÚ16Çø¿ªÊ¼£¬¼´0xB0=11*16=176,16~55Ò»¼¶ºº×Ö£¬56~87¶ş¼¶ºº×Ö
-
+		highPos = (176 + Math.abs(random.nextInt(39)));// åŒºç ï¼Œ0xA0æ‰“å¤´ï¼Œä»ç¬¬16åŒºå¼€å§‹ï¼Œå³0xB0=11*16=176,16~55ä¸€çº§æ±‰å­—ï¼Œ56~87äºŒçº§æ±‰å­—
 		random = new Random();
-
-		lowPos = 161 + Math.abs(random.nextInt(94));// Î»Âë£¬0xA0´òÍ·£¬·¶Î§µÚ1~94ÁĞ
-
+		lowPos = 161 + Math.abs(random.nextInt(94));// ä½ç ï¼Œ0xA0æ‰“å¤´ï¼ŒèŒƒå›´ç¬¬1~94åˆ—
 		byte[] bArr = new byte[2];
-
 		bArr[0] = (new Integer(highPos)).byteValue();
-
 		bArr[1] = (new Integer(lowPos)).byteValue();
-
 		try {
-
-			str = new String(bArr, "GB2312"); // ÇøÎ»Âë×éºÏ³Éºº×Ö
-
+			str = new String(bArr, "GB2312"); // åŒºä½ç ç»„åˆæˆæ±‰å­—
 		} catch (UnsupportedEncodingException e) {
-
 			e.printStackTrace();
-
+		}
+		return str;
+	}
+	/**
+	 * @Title: randomChineseString   
+	 * @Description: è¿”å›å‚æ•°lengthä¸ªä¸­æ–‡æ±‰å­—å­—ç¬¦ä¸²ï¼Œå­—ç¬¦é›†å¿…é¡»åœ¨GB2312(ç›¸å½“äºä¸­æ–‡ç®€ä½“)èŒƒå›´å†…   
+	 * @param: @param length
+	 * @param: @return      
+	 * @return: String      
+	 * @throws
+	 */
+	public static String randomChineseString(int length) {
+		String str = "";
+		for (int i = 0; i < length; i++) {
+			str += randomChineseString();
 		}
 
 		return str;
-
 	}
-
 	/**
-
-	 * @Title: randomChineseString   
-
-	 * @Description: »ñµÃËæ»úÖĞÎÄ   
-
-	 * @param: @param num
-
-	 * @param: @return      
-
-	 * @return: String      
-
-	 * @throws
-
-	 */
-
-	public static String randomChineseString(int num) {
-
-		StringBuffer sb = new StringBuffer();
-
-		for(int i=0;i<num;i++) {
-
-			String randomChineseString = randomChineseString();
-
-			sb.append(randomChineseString);
-
-		}
-
-		return sb.toString();
-
-	}
-
-	/**
-
 	 * @Title: randomChineseName   
-
-	 * @Description: °Ù¼ÒĞÕ »ñµÃËæ»úĞÕ  
-
+	 * @Description: ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Êµï¿½Õ¿ï¿½Í·
 	 * @param: @return      
-
 	 * @return: String      
-
 	 * @throws
-
 	 */
-
 	public static String randomChineseName() {
-
-		String[] surname = { "ÕÔ", "Ç®", "Ëï", "Àî", "ÖÜ", "Îâ", "Ö£", "Íõ", "·ë", "³Â", "ñÒ", "ÎÀ", "½¯", "Éò", "º«", "Ñî", "Öì", "ÇØ",
-
-				"ÓÈ", "Ğí", "ºÎ", "ÂÀ", "Ê©", "ÕÅ", "¿×", "²Ü", "ÑÏ", "»ª", "½ğ", "Îº", "ÌÕ", "½ª", "Æİ", "Ğ»", "×Ş", "Ó÷", "°Ø", "Ë®", "ñ¼",
-
-				"ÕÂ", "ÔÆ", "ËÕ", "ÅË", "¸ğ", "ŞÉ", "·¶", "Åí", "ÀÉ", "Â³", "Î¤", "²ı", "Âí", "Ãç", "·ï", "»¨", "·½", "Óá", "ÈÎ", "Ô¬", "Áø",
-
-				"Ûº", "±«", "Ê·", "ÌÆ", "·Ñ", "Á®", "á¯", "Ñ¦", "À×", "ºØ", "Äß", "ÌÀ", "ëø", "Òó", "ÂŞ", "±Ï", "ºÂ", "Úù", "°²", "³£", "ÀÖ",
-
-				"ÓÚ", "Ê±", "¸µ", "Æ¤", "±å", "Æë", "¿µ", "Îé", "Óà", "Ôª", "²·", "¹Ë", "ÃÏ", "Æ½", "»Æ", "ºÍ", "ÄÂ", "Ïô", "Òü", "Ò¦", "ÉÛ",
-
-				"Õ¿", "Íô", "Æî", "Ã«", "Óí", "µÒ", "Ã×", "±´", "Ã÷", "ê°", "¼Æ", "·ü", "³É", "´÷", "Ì¸", "ËÎ", "Ã©", "ÅÓ", "ĞÜ", "¼Í", "Êæ",
-
-				"Çü", "Ïî", "×£", "¶­", "Áº", "¶Å", "Èî", "À¶", "ãÉ", "Ï¯", "¼¾", "Âé", "Ç¿", "¼Ö", "Â·", "Â¦", "Î£", "½­", "Í¯", "ÑÕ", "¹ù",
-
-				"Ã·", "Ê¢", "ÁÖ", "µó", "ÖÓ", "Ğì", "Çñ", "Âæ", "¸ß", "ÏÄ", "²Ì", "Ìï", "·®", "ºú", "Áè", "»ô", "Óİ", "Íò", "Ö§", "¿Â", "êÃ",
-
-				"¹Ü", "Â¬", "Äª", "¾­", "·¿", "ôÃ", "çÑ", "¸É", "½â", "Ó¦", "×Ú", "¶¡", "Ğû", "êÚ", "µË", "Óô", "µ¥", "º¼", "ºé", "°ü", "Öî",
-
-				"×ó", "Ê¯", "´Ş", "¼ª", "Å¥", "¹¨", "³Ì", "ïú", "ĞÏ", "»¬", "Åá", "Â½", "ÈÙ", "ÎÌ", "Ü÷", "Ñò", "ÓÚ", "»İ", "Õç", "Çú", "¼Ò",
-
-				"·â", "ÜÇ", "ôà", "´¢", "½ù", "¼³", "Úû", "ÃÓ", "ËÉ", "¾®", "¶Î", "¸»", "Î×", "ÎÚ", "½¹", "°Í", "¹­", "ÄÁ", "Úó", "É½", "¹È",
-
-				"³µ", "ºî", "åµ", "Åî", "È«", "Û­", "°à", "Ñö", "Çï", "ÖÙ", "ÒÁ", "¹¬", "Äş", "³ğ", "èï", "±©", "¸Ê", "î×", "À÷", "ÈÖ", "×æ",
-
-				"Îä", "·û", "Áõ", "¾°", "Õ²", "Êø", "Áú", "Ò¶", "ĞÒ", "Ë¾", "ÉØ", "Û¬", "Àè", "¼»", "äß", "Ó¡", "ËŞ", "°×", "»³", "ÆÑ", "Û¢",
-
-				"´Ó", "¶õ", "Ë÷", "ÏÌ", "¼®", "Àµ", "×¿", "İş", "ÍÀ", "ÃÉ", "³Ø", "ÇÇ", "Òõ", "Óô", "ñã", "ÄÜ", "²Ô", "Ë«", "ÎÅ", "İ·", "µ³",
-
-				"µÔ", "Ì·", "¹±", "ÀÍ", "åÌ", "¼§", "Éê", "·ö", "¶Â", "È½", "Ô×", "Ûª", "Óº", "È´", "è³", "É£", "¹ğ", "å§", "Å£", "ÊÙ", "Í¨",
-
-				"±ß", "ìè", "Ñà", "¼½", "ÆÖ", "ÉĞ", "Å©", "ÎÂ", "±ğ", "×¯", "êÌ", "²ñ", "öÄ", "ÑÖ", "³ä", "Ä½", "Á¬", "Èã", "Ï°", "»Â", "°¬",
-
-				"Óã", "Èİ", "Ïò", "¹Å", "Ò×", "É÷", "¸ê", "ÁÎ", "â×", "ÖÕ", "ôß", "¾Ó", "ºâ", "²½", "¶¼", "¹¢", "Âú", "ºë", "¿ï", "¹ú", "ÎÄ",
-
-				"¿Ü", "¹ã", "Â»", "ãÚ", "¶«", "Å·", "ì¯", "ÎÖ", "Àû", "Îµ", "Ô½", "Ùç", "Â¡", "Ê¦", "¹®", "ØÇ", "Äô", "êË", "¹´", "°½", "ÈÚ",
-
-				"Àä", "ö¤", "ĞÁ", "ãÛ", "ÄÇ", "¼ò", "ÈÄ", "¿Õ", "Ôø", "Îã", "É³", "Ø¿", "Ñø", "¾Ï", "Ğë", "·á", "³²", "¹Ø", "Øá", "Ïà", "²é",
-
-				"ºó", "¾£", "ºì", "ÓÎ", "Û£", "óÃ", "È¨", "åÖ", "¸Ç", "Òæ", "»¸", "¹«", "Øë", "¶½", "ÔÀ", "Ë§", "çÃ", "¿º", "¿ö", "àC", "ÓĞ",
-
-				"ÇÙ", "¹é", "º£", "½ú", "³ş", "ãÆ", "·¨", "Èê", "Û³", "Í¿", "ÇÕ", "ÉÌ", "Ä²", "ÙÜ", "Ù¦", "²®", "ÉÍ", "Ä«", "¹ş", "ÚÛ", "óò",
-
-				"Äê", "°®", "Ñô", "Ù¡", "ÑÔ", "¸£", "ÄÏ", "»ğ", "Ìú", "³Ù", "Æá", "¹Ù", "Ùş", "Õæ", "Õ¹", "·±", "Ì´", "¼À", "ÃÜ", "¾´", "½Ò",
-
-				"Ë´", "Â¥", "Êè", "Ã°", "»ë", "Ö¿", "½º", "Ëæ", "¸ß", "¸Ş", "Ô­", "ÖÖ", "Á·", "ÃÖ", "²Ö", "íõ", "å¿", "ñû", "°¢", "ÃÅ", "ã¢",
-
-				"À´", "ôë", "ÕÙ", "ÒÇ", "·ç", "½é", "¾Ş", "Ä¾", "¾©", "ºü", "Û¨", "»¢", "Ã¶", "¿¹", "´ï", "è½", "ÜÉ", "ÕÛ", "Âó", "Çì", "¹ı",
-
-				"Öñ", "¶Ë", "ÏÊ", "»Ê", "ØÁ", "ÀÏ", "ÊÇ", "ÃØ", "³©", "Ú÷", "»¹", "±ö", "ãÌ", "¹¼", "×İ", "‚G", "ÍòÙ¹", "Ë¾Âí", "ÉÏ¹Ù", "Å·Ñô",
-
-				"ÏÄºî", "Öî¸ğ", "ÎÅÈË", "¶«·½", "ºÕÁ¬", "»Ê¸¦", "ÑòÉà", "Î¾³Ù", "¹«Ñò", "å£Ì¨", "¹«Ò±", "×ÚÕı", "å§Ñô", "´¾ÓÚ", "µ¥ÓÚ", "Ì«Êå", "ÉêÍÀ",
-
-				"¹«Ëï", "ÖÙËï", "ĞùÔ¯", "Áîºü", "ÖÓÀë", "ÓîÎÄ", "³¤Ëï", "Ä½Èİ", "ÏÊÓÚ", "ãÌÇğ", "Ë¾Í½", "Ë¾¿Õ", "Ø£¹Ù", "Ë¾¿Ü", "ÄÏÃÅ", "ºôÑÓ", "×Ó³µ",
-
-				"ò§Ëï", "¶ËÄ¾", "Î×Âí", "¹«Î÷", "Æáµñ", "³µÕı", "ÈÀæá", "¹«Á¼", "ÍØ°Ï", "¼Ğ¹È", "Ô×¸¸", "¹ÈÁº", "¶Î¸É", "°ÙÀï", "¶«¹ù", "Î¢Éú", "ÁºÇğ",
-
-				"×óÇğ", "¶«ÃÅ", "Î÷ÃÅ", "ÄÏ¹¬", "µÚÎå", "¹«ÒÇ", "¹«³Ë", "Ì«Ê·", "ÖÙ³¤", "ÊåËï", "ÇüÍ»", "¶ûÖì", "¶«Ïç", "ÏàÀï", "ºúÄ¸", "Ë¾³Ç", "ÕÅÁÎ",
-
-				"ÓºÃÅ", "ÎãÇğ", "ºØÀ¼", "ôëÎã", "ÎİÂ®", "¶À¹Â", "ÄÏ¹ù", "±±¹¬", "ÍõËï" };
-
-		// Ëæ»ú»ñÈ¡ĞÕÊÏ
-
+		String[] surname = { "èµµ", "é’±", "å­™", "æ", "å‘¨", "å´", "éƒ‘", "ç‹", "å†¯", "é™ˆ", "è¤š", "å«", "è’‹", "æ²ˆ", "éŸ©", "æ¨", "æœ±", "ç§¦",
+				"å°¤", "è®¸", "ä½•", "å•", "æ–½", "å¼ ", "å­”", "æ›¹", "ä¸¥", "å", "é‡‘", "é­", "é™¶", "å§œ", "æˆš", "è°¢", "é‚¹", "å–»", "æŸ", "æ°´", "çª¦",
+				"ç« ", "äº‘", "è‹", "æ½˜", "è‘›", "å¥š", "èŒƒ", "å½­", "éƒ", "é²", "éŸ¦", "æ˜Œ", "é©¬", "è‹—", "å‡¤", "èŠ±", "æ–¹", "ä¿", "ä»»", "è¢", "æŸ³",
+				"é…†", "é²", "å²", "å”", "è´¹", "å»‰", "å²‘", "è–›", "é›·", "è´º", "å€ª", "æ±¤", "æ»•", "æ®·", "ç½—", "æ¯•", "éƒ", "é‚¬", "å®‰", "å¸¸", "ä¹",
+				"äº", "æ—¶", "å‚…", "çš®", "å", "é½", "åº·", "ä¼", "ä½™", "å…ƒ", "åœ", "é¡¾", "å­Ÿ", "å¹³", "é»„", "å’Œ", "ç©†", "è§", "å°¹", "å§š", "é‚µ",
+				"æ¹›", "æ±ª", "ç¥", "æ¯›", "ç¦¹", "ç‹„", "ç±³", "è´", "æ˜", "è‡§", "è®¡", "ä¼", "æˆ", "æˆ´", "è°ˆ", "å®‹", "èŒ…", "åº", "ç†Š", "çºª", "èˆ’",
+				"å±ˆ", "é¡¹", "ç¥", "è‘£", "æ¢", "æœ", "é˜®", "è“", "é—µ", "å¸­", "å­£", "éº»", "å¼º", "è´¾", "è·¯", "å¨„", "å±", "æ±Ÿ", "ç«¥", "é¢œ", "éƒ­",
+				"æ¢…", "ç››", "æ—", "åˆ", "é’Ÿ", "å¾", "é‚±", "éª†", "é«˜", "å¤", "è”¡", "ç”°", "æ¨Š", "èƒ¡", "å‡Œ", "éœ", "è™", "ä¸‡", "æ”¯", "æŸ¯", "æ˜",
+				"ç®¡", "å¢", "è«", "ç»", "æˆ¿", "è£˜", "ç¼ª", "å¹²", "è§£", "åº”", "å®—", "ä¸", "å®£", "è´²", "é‚“", "éƒ", "å•", "æ­", "æ´ª", "åŒ…", "è¯¸",
+				"å·¦", "çŸ³", "å´”", "å‰", "é’®", "é¾š", "ç¨‹", "åµ‡", "é‚¢", "æ»‘", "è£´", "é™†", "è£", "ç¿", "è€", "ç¾Š", "äº", "æƒ ", "ç”„", "æ›²", "å®¶",
+				"å°", "èŠ®", "ç¾¿", "å‚¨", "é³", "æ±²", "é‚´", "ç³œ", "æ¾", "äº•", "æ®µ", "å¯Œ", "å·«", "ä¹Œ", "ç„¦", "å·´", "å¼“", "ç‰§", "éš—", "å±±", "è°·",
+				"è½¦", "ä¾¯", "å®“", "è“¬", "å…¨", "éƒ—", "ç­", "ä»°", "ç§‹", "ä»²", "ä¼Š", "å®«", "å®", "ä»‡", "æ ¾", "æš´", "ç”˜", "é’­", "å‰", "æˆ", "ç¥–",
+				"æ­¦", "ç¬¦", "åˆ˜", "æ™¯", "è©¹", "æŸ", "é¾™", "å¶", "å¹¸", "å¸", "éŸ¶", "éƒœ", "é»", "è“Ÿ", "æº¥", "å°", "å®¿", "ç™½", "æ€€", "è’²", "é‚°",
+				"ä»", "é„‚", "ç´¢", "å’¸", "ç±", "èµ–", "å“", "è”º", "å± ", "è’™", "æ± ", "ä¹”", "é˜´", "éƒ", "èƒ¥", "èƒ½", "è‹", "åŒ", "é—»", "è˜", "å…š",
+				"ç¿Ÿ", "è°­", "è´¡", "åŠ³", "é€„", "å§¬", "ç”³", "æ‰¶", "å µ", "å†‰", "å®°", "éƒ¦", "é›", "å´", "ç’©", "æ¡‘", "æ¡‚", "æ¿®", "ç‰›", "å¯¿", "é€š",
+				"è¾¹", "æ‰ˆ", "ç‡•", "å†€", "æµ¦", "å°š", "å†œ", "æ¸©", "åˆ«", "åº„", "æ™", "æŸ´", "ç¿", "é˜", "å……", "æ…•", "è¿", "èŒ¹", "ä¹ ", "å®¦", "è‰¾",
+				"é±¼", "å®¹", "å‘", "å¤", "æ˜“", "æ…", "æˆˆ", "å»–", "åº¾", "ç»ˆ", "æš¨", "å±…", "è¡¡", "æ­¥", "éƒ½", "è€¿", "æ»¡", "å¼˜", "åŒ¡", "å›½", "æ–‡",
+				"å¯‡", "å¹¿", "ç¦„", "é˜™", "ä¸œ", "æ¬§", "æ®³", "æ²ƒ", "åˆ©", "è”š", "è¶Š", "å¤”", "éš†", "å¸ˆ", "å·©", "å", "è‚", "æ™", "å‹¾", "æ•–", "è",
+				"å†·", "è¨¾", "è¾›", "é˜š", "é‚£", "ç®€", "é¥¶", "ç©º", "æ›¾", "æ¯‹", "æ²™", "ä¹œ", "å…»", "é ", "é¡»", "ä¸°", "å·¢", "å…³", "è’¯", "ç›¸", "æŸ¥",
+				"å", "è†", "çº¢", "æ¸¸", "éƒ", "ç«º", "æƒ", "é€¯", "ç›–", "ç›Š", "æ¡“", "å…¬", "ä»‰", "ç£", "å²³", "å¸…", "ç¼‘", "äº¢", "å†µ", "éƒˆ", "æœ‰",
+				"ç´", "å½’", "æµ·", "æ™‹", "æ¥š", "é—«", "æ³•", "æ±", "é„¢", "æ¶‚", "é’¦", "å•†", "ç‰Ÿ", "ä½˜", "ä½´", "ä¼¯", "èµ", "å¢¨", "å“ˆ", "è°¯", "ç¯",
+				"å¹´", "çˆ±", "é˜³", "ä½Ÿ", "è¨€", "ç¦", "å—", "ç«", "é“", "è¿Ÿ", "æ¼†", "å®˜", "å†¼", "çœŸ", "å±•", "ç¹", "æª€", "ç¥­", "å¯†", "æ•¬", "æ­",
+				"èˆœ", "æ¥¼", "ç–", "å†’", "æµ‘", "æŒš", "èƒ¶", "éš", "é«˜", "çš‹", "åŸ", "ç§", "ç»ƒ", "å¼¥", "ä»“", "çœ­", "è¹‡", "è¦ƒ", "é˜¿", "é—¨", "æ½",
+				"æ¥", "ç¶¦", "å¬", "ä»ª", "é£", "ä»‹", "å·¨", "æœ¨", "äº¬", "ç‹", "éƒ‡", "è™", "æš", "æŠ—", "è¾¾", "æ", "è‹Œ", "æŠ˜", "éº¦", "åº†", "è¿‡",
+				"ç«¹", "ç«¯", "é²œ", "çš‡", "äº“", "è€", "æ˜¯", "ç§˜", "ç•…", "é‚", "è¿˜", "å®¾", "é—¾", "è¾œ", "çºµ", "ä¾´", "ä¸‡ä¿Ÿ", "å¸é©¬", "ä¸Šå®˜", "æ¬§é˜³",
+				"å¤ä¾¯", "è¯¸è‘›", "é—»äºº", "ä¸œæ–¹", "èµ«è¿", "çš‡ç”«", "ç¾ŠèˆŒ", "å°‰è¿Ÿ", "å…¬ç¾Š", "æ¾¹å°", "å…¬å†¶", "å®—æ­£", "æ¿®é˜³", "æ·³äº", "å•äº", "å¤ªå”", "ç”³å± ",
+				"å…¬å­™", "ä»²å­™", "è½©è¾•", "ä»¤ç‹", "é’Ÿç¦»", "å®‡æ–‡", "é•¿å­™", "æ…•å®¹", "é²œäº", "é—¾ä¸˜", "å¸å¾’", "å¸ç©º", "å…€å®˜", "å¸å¯‡", "å—é—¨", "å‘¼å»¶", "å­è½¦",
+				"é¢›å­™", "ç«¯æœ¨", "å·«é©¬", "å…¬è¥¿", "æ¼†é›•", "è½¦æ­£", "å£¤é©·", "å…¬è‰¯", "æ‹“è·‹", "å¤¹è°·", "å®°çˆ¶", "è°·æ¢", "æ®µå¹²", "ç™¾é‡Œ", "ä¸œéƒ­", "å¾®ç”Ÿ", "æ¢ä¸˜",
+				"å·¦ä¸˜", "ä¸œé—¨", "è¥¿é—¨", "å—å®«", "ç¬¬äº”", "å…¬ä»ª", "å…¬ä¹˜", "å¤ªå²", "ä»²é•¿", "å”å­™", "å±ˆçª", "å°”æœ±", "ä¸œä¹¡", "ç›¸é‡Œ", "èƒ¡æ¯", "å¸åŸ", "å¼ å»–",
+				"é›é—¨", "æ¯‹ä¸˜", "è´ºå…°", "ç¶¦æ¯‹", "å±‹åº", "ç‹¬å­¤", "å—éƒ­", "åŒ—å®«", "ç‹å­™" };
+		// éšæœºè·å–å§“æ°
 		String name1 = surname[RandomUtil.random(0, surname.length - 1)];
-
-		// Ëæ»ú»ñÈ¡1-2¸öÖĞÎÄ
-
-		String name2 = randomChineseString(RandomUtil.random(1, 3));
-
+		// éšæœºè·å–1-2ä¸ªä¸­æ–‡
+		String name2 = randomChineseString(RandomUtil.random(1, 2));
 		return name1 + name2;
+	}
+	
 
+	/**
+	 * éªŒè¯æ˜¯å¦æ˜¯URL
+	 * @param url
+	 * @return
+	 */
+	public static boolean isHttpUrl(String str){
+		 //è½¬æ¢ä¸ºå°å†™
+        str = str.toLowerCase();
+        String regex = "^((https|http|ftp|rtsp|mms)?://)"  //httpsã€httpã€ftpã€rtspã€mms
+                + "?(([0-9a-z_!~*'().&=+$%-]+: )?[0-9a-z_!~*'().&=+$%-]+@)?" //ftpçš„user@  
+               + "(([0-9]{1,3}\\.){3}[0-9]{1,3}" // IPå½¢å¼çš„URL- ä¾‹å¦‚ï¼š199.194.52.184               
+                 + "|" // å…è®¸IPå’ŒDOMAINï¼ˆåŸŸåï¼‰ æˆ–å•åŸŸå
+                 + "[0-9a-z]*"  // æˆ–å•åŸŸå
+                 + "|" // å…è®¸IPå’ŒDOMAINï¼ˆåŸŸåï¼‰ æˆ–å•åŸŸå
+                 + "([0-9a-z_!~*'()-]+\\.)*" // åŸŸå- www.  
+                 + "([0-9a-z][0-9a-z-]{0,61})?[0-9a-z]\\." // äºŒçº§åŸŸå  
+                + "[a-z]{2,6})" // first level domain- .com or .museum  
+                + "(:[0-9]{1,5})?" // ç«¯å£å·æœ€å¤§ä¸º65535,5ä½æ•°
+                + "((/?)|" // a slash isn't required if there is no file name  
+                + "(/[0-9a-z_!~*'().;?:@&=+$,%#-]+)+/?)$";  
+        return  str.matches(regex);	
+	}
+	
+	public static boolean isNumber1(String src) {
+		String nuber="\\d";
+		return src.matches(nuber);
+	}
+	
+	public static boolean judgeTelephoneIsOk(String src){
+		String phone="1\\d{10}";
+		return src.matches(phone);
 	}
 
 	
-
-	
+	public static boolean isNumber(String num) {
+		String number ="123";
+		return num.matches(number);
+	}
 
 	public static void main(String[] args) {
-
-		for(int i=0;i<100;i++)
-
-		System.out.println(randomChineseName());
-
+		boolean judgeTelephoneIsOk = StringUtil.judgeTelephoneIsOk("15505220942");
+		System.out.println(judgeTelephoneIsOk);
 	}
-
-
 
 }
