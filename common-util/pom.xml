@@ -3,8 +3,6 @@
   <groupId>com.lzh</groupId>
   <artifactId>common-util</artifactId>
   <version>0.0.1-SNAPSHOT</version>
-  <name>lizhihao-common-util</name>
-  <description>lizhihao-common-util</description>
   <properties>
   	<junit-version>4.12</junit-version>
   </properties>

@@ -5,14 +5,14 @@ import java.util.Random;
 
 public class StringUtil {
 	/**
-	 * @Title: isBlank   
+	 * @Title: isNull   
 	 * @Description: 判断字符串是否为空  
 	 * @param: @param str
 	 * @param: @return      
 	 * @return: boolean      
 	 * @throws
 	 */
-	public static boolean isBlank(String str) {
+	public static boolean isNull(String str) {
 		if(str==null) {
 			return true;
 		}
@@ -32,8 +32,8 @@ public class StringUtil {
 	 * @return: boolean      
 	 * @throws
 	 */
-	public static boolean isNotBlank(String str) {
-		return !isBlank(str);
+	public static boolean isNotNull(String str) {
+		return !isNull(str);
 	}
 	
 	/**
@@ -68,7 +68,7 @@ public class StringUtil {
 	 * @throws
 	 */
 	public static boolean isLetter(String str) {
-		if(isNotBlank(str)) {
+		if(isNotNull(str)) {
 			str = str.toLowerCase();
 			String regex = "[a-z]+";
 			return str.matches(regex);

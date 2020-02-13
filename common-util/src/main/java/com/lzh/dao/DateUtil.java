@@ -1,6 +1,7 @@
 package com.lzh.dao;
 
 
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -13,6 +14,7 @@ import java.util.Date;
 public class DateUtil {
 	public static SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 	public static SimpleDateFormat dateTimeFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+	private static DateFormat sdf2;
 	
 	/**
 	 * @Title: format   
@@ -231,6 +233,22 @@ public class DateUtil {
 		
 	}
 	
+	//获得指定时间之前的时间   例如 获得两小时前的时间  ms
+	
+		public static String getIntervalDate(long millis) {
+			//获得系统当前时间的毫秒
+			Date date=new Date();
+			long time1 = date.getTime();
+			
+			//获得需要得到的时间的毫秒
+			long time=time1-millis;
+			//通过获得的毫秒得到时间
+			date.setTime(time);
+			String format = sdf2.format(date);
+			return format;
+			
+		}
+
 	public static void main(String[] args) throws ParseException {
 		Date firstDateInMonth = getLastDateInMonth(new Date());
 		System.out.println();
